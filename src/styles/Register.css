@@ -1,0 +1,41 @@
+.input-register-left {
+  margin-bottom: 20px;
+  animation-name: slideInFromLeft;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.input-register-right {
+  margin-bottom: 20px;
+  animation-name: slideInFromRight;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.register-button {
+  animation: scaleDown 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  color: var(--text-color);
+  /* justify-content: center; */
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+@media (min-width: 600px) {
+  .input-register-right {
+    width: 560px;
+  }
+  .input-register-left {
+    width: 560px;
+  }
+  .register-container {
+    min-height: 90vh;
+  }
+}

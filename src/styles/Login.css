@@ -1,0 +1,8 @@
+.login-button {
+  margin-top: 10px;
+}
+
+.login-modal .ant-modal-body {
+  display: flex;
+  flex-direction: column;
+}

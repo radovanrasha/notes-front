@@ -1,0 +1,166 @@
+.myprofile-container {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+  font-size: 24px;
+  word-wrap: break-word;
+  padding: 20px;
+  width: 100%;
+}
+
+.myprofile-div {
+  width: 100%;
+  color: var(--text-color);
+  background-color: var(--darker);
+  border-radius: 20px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.myprofile-div input {
+  color: var(--text-color) !important;
+}
+
+.edit-my-profile-div input {
+  color: var(--bg-color) !important;
+}
+
+.edit-div {
+  display: flex;
+  color: var(--text-color);
+  font-size: 24px;
+  word-wrap: break-word;
+  border-radius: 20px;
+  margin: 5px;
+  padding: 10px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--darker);
+}
+
+.editIcon {
+  max-height: 70px;
+  margin: 15px;
+}
+
+.save-div {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.myprofile-buttons {
+  display: flex;
+}
+
+.active-div-myprofile {
+  display: flex;
+  color: var(--text-color);
+  font-size: 24px;
+  word-wrap: break-word;
+  border-radius: 20px;
+  margin: 5px;
+  padding: 10px;
+  min-width: 200px;
+  align-items: center;
+  background: linear-gradient(
+    82.3deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+}
+
+.inactive-div-myprofile {
+  display: flex;
+  color: var(--text-color);
+  font-size: 24px;
+  word-wrap: break-word;
+  border-radius: 20px;
+  margin: 5px;
+  padding: 10px;
+  min-width: 200px;
+  align-items: center;
+  background-color: var(--darker);
+}
+
+.inactive-div-myprofile:hover {
+  background: linear-gradient(
+    82.3deg,
+    rgba(149, 93, 233, 0.678) 10.8%,
+    rgba(98, 88, 238, 0.315) 94.3%
+  );
+}
+
+.message-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myprofile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myprofile-div-container {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+  font-size: 24px;
+  word-wrap: break-word;
+  padding: 20px;
+  width: 95%;
+}
+
+.follower-card {
+  display: flex;
+  color: var(--text-color);
+  font-size: 24px;
+  word-wrap: break-word;
+  border-radius: 20px;
+  margin: 5px;
+  padding: 10px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--darker);
+}
+
+.follower-card-profilepic {
+  height: 40px;
+  padding: 0px;
+  margin: 0 10px 0 0;
+}
+
+.follow-cards {
+  width: 600px;
+}
+
+.unfollow-button {
+  display: flex;
+  color: var(--text-color);
+  font-size: 24px;
+  word-wrap: break-word;
+  border-radius: 10px;
+  min-height: 40px;
+  margin: 5px;
+  padding: 15px;
+  align-items: center;
+  border: none;
+  background: linear-gradient(
+    82.3deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+}
+
+@media (max-width: 720px) {
+  .myprofile-buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+  .follow-cards {
+    width: 90%;
+  }
+}

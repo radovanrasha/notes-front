@@ -1,0 +1,107 @@
+.notes-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 90vh;
+}
+
+.notes-header {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px;
+}
+
+.notes-header-button {
+  margin: 10px;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.publicnotes-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.one-note {
+  width: 80%;
+  height: 180px;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: var(--darker);
+  color: var(--text-color);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.one-note:nth-child(2n) {
+  animation-name: slideInFromRight;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.one-note:nth-child(2n -1) {
+  animation-name: slideInFromLeft;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.one-note-header {
+  display: flex;
+  justify-content: space-between;
+  /* justify-content: center; */
+  align-items: center;
+  font-size: 18px;
+  border-bottom: 1px dashed var(--text-color-sec);
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.one-note-header p {
+  width: 55%;
+  height: 20px;
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.delEditButton {
+  margin: 0 5px 5px 0;
+}
+
+@media (min-width: 600px) {
+  .one-note {
+    width: 460px;
+  }
+  .notes-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .publicnotes-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+.empty-notes {
+  color: var(--text-color);
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  min-height: 80vh;
+  text-align: center;
+}
