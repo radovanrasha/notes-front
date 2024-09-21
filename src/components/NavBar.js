@@ -72,9 +72,6 @@ export default function () {
           <CustomLink setMenuActive={setMenuActive} to="/public-notes">
             Public Notes
           </CustomLink>
-          <CustomLink setMenuActive={setMenuActive} to="/projects">
-            Other projects
-          </CustomLink>
           <CustomLink setMenuActive={setMenuActive} to="/about">
             About me
           </CustomLink>
