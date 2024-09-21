@@ -74,7 +74,7 @@ const PublicNotes = () => {
             return (
               <div className="one-note">
                 <div className="one-note-header">
-                  <p>Title: {item.title}</p>
+                  <p>{item.title}</p>
                   <div>
                     <Link to={`/public-notes/${item._id}`}>
                       <Button>View</Button>
@@ -89,8 +89,8 @@ const PublicNotes = () => {
                     </Button>
                   </div>
                 </div>
-                <div className="one-note-header">
-                  <p>By: {item.createdBy.username}</p>
+                <div className="one-note-creator">
+                  <p>{item.createdBy.username}</p>
                   {user &&
                     user._id !== item.createdBy._id &&
                     !user?.following?.some(

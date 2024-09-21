@@ -26,11 +26,9 @@ const PublicNote = ({ isNew }) => {
     <div className="publicnote-page-container">
       {data && data.title && data.createdBy && (
         <div className="one-publicnote-container">
-          <div className="one-publicnote-title">Title: {data.title} </div>
-          <div className="one-publicnote-by">
-            By: {data.createdBy.username}{" "}
-          </div>
-          <div className="one-publicnote-content">Content: {data.content}</div>
+          <div className="one-publicnote-title">{data.title} </div>
+          <div className="one-publicnote-by">{data.createdBy.username}</div>
+          <div className="one-publicnote-content"> {data.content}</div>
         </div>
       )}
 
