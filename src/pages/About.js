@@ -7,7 +7,6 @@ import about4 from "../assets/about4.jpg";
 const About = () => {
   return (
     <div className="about-container">
-      <p className="header-div"> &lt;About me/&gt;</p>
       <div className="about-row">
         <img
           className="leftslide"

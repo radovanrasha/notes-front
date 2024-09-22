@@ -108,7 +108,7 @@ const MyProfile = ({ isNew }) => {
                     : "myprofile-div edit-my-profile-div"
                 }
               >
-                Username: <Input disabled={viewState} value={username}></Input>
+                Email: {data.email}
               </div>
               <div
                 className={
@@ -117,8 +117,9 @@ const MyProfile = ({ isNew }) => {
                     : "myprofile-div edit-my-profile-div"
                 }
               >
-                Email: {data.email}
+                Username: <Input disabled={viewState} value={username}></Input>
               </div>
+
               <div
                 className={
                   viewState
@@ -130,6 +131,7 @@ const MyProfile = ({ isNew }) => {
               </div>
               {viewState && (
                 <button
+                  className="custom-button-blue"
                   onClick={() => {
                     setViewState(false);
                   }}
@@ -140,6 +142,7 @@ const MyProfile = ({ isNew }) => {
               {!viewState && (
                 <div>
                   <button
+                    className="custom-button-blue"
                     onClick={() => {
                       setViewState(true);
                     }}
@@ -147,6 +150,7 @@ const MyProfile = ({ isNew }) => {
                     <span>Cancel</span>
                   </button>
                   <button
+                    className="custom-button-red"
                     onClick={() => {
                       setViewState(true);
                     }}
