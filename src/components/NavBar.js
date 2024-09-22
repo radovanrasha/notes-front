@@ -1,55 +1,16 @@
-import {
-  Link,
-  useMatch,
-  useResolvedPath,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-import React, { useState, useContext, useEffect } from "react"; // Import useState
-import Cookies from "universal-cookie";
-import jwt from "jwt-decode";
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import { ThemeContext } from "../ThemeContext";
 import sun from "../assets/sun.png";
 import moon from "../assets/moon.png";
 import profile from "../assets/profile.png";
 
-export default function () {
-  const cookies = new Cookies();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState();
+export default function NavBar({ loggedIn, handleLogOut }) {
   const [menuActive, setMenuActive] = useState(false);
   const { theme, setTheme } = useContext(ThemeContext);
 
-  useEffect(() => {
-    if (!cookies || !cookies.get("jwt")) {
-      return;
-    }
-
-    const decoded = jwt(cookies.get("jwt"));
-
-    if (!decoded || !decoded.exp) {
-      return;
-    }
-
-    const currentTime = Date.now() / 1000; // in seconds
-
-    if (decoded.exp < currentTime) {
-      setLoggedIn(false);
-    } else {
-      setLoggedIn(true);
-    }
-  }, [location.pathname]);
-
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
-
-  const handleLogOut = () => {
-    cookies.remove("jwt");
-    cookies.remove("user");
-    navigate("/");
-    window.location.reload();
   };
 
   return (

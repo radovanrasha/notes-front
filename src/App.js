@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "./ThemeContext";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import About from "./pages/About";
@@ -10,45 +10,57 @@ import PublicNote from "./pages/PublicNote";
 import Home from "./pages/Home";
 import Notes from "./pages/Notes";
 import Register from "./pages/Register";
+import MyProfile from "./pages/MyProfile";
 import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
 import GuestRoute from "./GuestRoutes";
 import PrivateRoute from "./PrivateRoutes";
-import MyProfile from "./pages/MyProfile";
 
 function App() {
   const cookies = new Cookies();
   const location = useLocation();
-  const [loggedIn, setLoggedIn] = useState();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!cookies || !cookies.get("jwt")) {
-      return;
-    }
+    const checkAuth = () => {
+      const token = cookies.get("jwt");
+      if (!token) {
+        setLoggedIn(false);
+        return;
+      }
 
-    const decoded = jwt(cookies.get("jwt"));
+      try {
+        const decoded = jwt(token);
+        const currentTime = Date.now() / 1000;
+        if (decoded.exp < currentTime) {
+          setLoggedIn(false);
+        } else {
+          setLoggedIn(true);
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        setLoggedIn(false);
+      }
+    };
 
-    if (!decoded || !decoded.exp) {
-      return;
-    }
+    checkAuth();
+  }, [location.pathname]);
 
-    const currentTime = Date.now() / 1000; // in seconds
-
-    if (decoded.exp < currentTime) {
-      setLoggedIn(false);
-    } else {
-      setLoggedIn(true);
-    }
-  }, [location.pathname, loggedIn]);
+  const handleLogOut = () => {
+    cookies.remove("jwt");
+    cookies.remove("user");
+    setLoggedIn(false);
+    navigate("/");
+  };
 
   return (
     <>
       <ThemeProvider>
-        <NavBar></NavBar>
+        <NavBar loggedIn={loggedIn} handleLogOut={handleLogOut}></NavBar>
         <div className="routes-div">
           <Routes>
-            <Route path="/" element={<Home></Home>}></Route>
-
+            <Route path="/" element={<Home loggedIn={loggedIn}></Home>}></Route>
             <Route
               path="/register"
               element={
@@ -57,7 +69,6 @@ function App() {
                 </GuestRoute>
               }
             ></Route>
-
             <Route
               path="/notes"
               element={
@@ -66,21 +77,20 @@ function App() {
                 </PrivateRoute>
               }
             ></Route>
-
             <Route path="/about" element={<About></About>}></Route>
             <Route
               path="/public-notes"
               element={<PublicNotes></PublicNotes>}
             ></Route>
-
             <Route
               path="/public-notes/:id"
               element={<PublicNote></PublicNote>}
             ></Route>
-
             <Route path="/my-profile" element={<MyProfile></MyProfile>}></Route>
-
-            <Route path="/*" element={<Home></Home>}></Route>
+            <Route
+              path="/*"
+              element={<Home loggedIn={loggedIn}></Home>}
+            ></Route>
           </Routes>
           <Footer></Footer>
         </div>

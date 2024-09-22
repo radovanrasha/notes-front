@@ -1,19 +1,17 @@
 import { Input, Button, notification, Modal } from "antd";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import moment from "moment";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
 import notesapplogo from "../assets/notesapplogo.png";
 
-const Home = () => {
+const Home = ({ loggedIn }) => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const cookies = new Cookies();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [loggedIn, setLoggedIn] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
   useEffect(() => {
@@ -22,62 +20,41 @@ const Home = () => {
     }
 
     const decoded = jwt(cookies.get("jwt"));
-
-    if (!decoded || !decoded.exp) {
-      return;
+    if (decoded && decoded._id) {
+      setUsername(decoded._id.username);
     }
-
-    setUsername(decoded._id.username);
-
-    const currentTime = Date.now() / 1000; // in seconds
-
-    if (decoded.exp < currentTime) {
-      setLoggedIn(false);
-    } else {
-      setLoggedIn(true);
-    }
-  });
+  }, []);
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
   const handleChangeEmail = (e) => {
-    setEmail(e);
+    setEmail(e.target.value);
   };
 
   const handleChangePassword = (e) => {
-    setPassword(e);
+    setPassword(e.target.value);
   };
 
   const handleLogin = async () => {
     try {
-      if (!email) {
+      if (!email || !password) {
         notification.error({
-          message: "Please enter email.",
+          message: "Please enter email and password.",
           duration: 2,
           placement: "bottomRight",
         });
         return;
       }
-      if (!password) {
-        notification.error({
-          message: "Please enter password.",
-          duration: 2,
-          placement: "bottomRight",
-        });
-        return;
-      }
+
       const body = { email, password };
-
       const res = await Axios.post(`${SERVER_URL}/login`, body);
-
       const decoded = jwt(res.data.token);
 
       cookies.set("jwt", res.data.token, {
         expires: new Date(decoded.exp * 1000),
       });
-
       cookies.set("user", res.data.item._doc._id, {
         expires: new Date(decoded.exp * 1000),
       });
@@ -91,16 +68,14 @@ const Home = () => {
     } catch (error) {
       console.log(error);
       if (
-        error?.response?.data ===
+        error.response?.data ===
         "User with this email does not exist. Please signup"
       ) {
         notification.error({
           message: "User with this email does not exist.",
           placement: "bottomRight",
         });
-      }
-
-      if (error?.response?.data?.message === "Wrong password") {
+      } else if (error.response?.data?.message === "Wrong password") {
         notification.error({
           message: "Wrong email or password.",
           placement: "bottomRight",
@@ -120,20 +95,19 @@ const Home = () => {
       )}
       {loggedIn && (
         <p className="title">
-          Hello {username}, <br></br> MAKE THE MOST OF YOUR NOTES
+          Hello {username}, <br /> MAKE THE MOST OF YOUR NOTES
         </p>
       )}
       {!loggedIn && <p className="title">MAKE THE MOST OF YOUR NOTES</p>}
+
       {!loggedIn && (
         <>
-          <Link to="/register" class="regbutton">
+          <Link to="/register" className="regbutton">
             SIGN UP NOW
           </Link>
           <button
-            onClick={() => {
-              setIsModalVisible(true);
-            }}
-            class="loginbutton"
+            onClick={() => setIsModalVisible(true)}
+            className="loginbutton"
           >
             Log in
           </button>
@@ -146,16 +120,12 @@ const Home = () => {
           >
             <label>Email:</label>
             <Input
-              onChange={(e) => {
-                handleChangeEmail(e.target.value);
-              }}
+              onChange={handleChangeEmail}
               className="input-login-left"
             ></Input>
             <label>Password:</label>
             <Input.Password
-              onChange={(e) => {
-                handleChangePassword(e.target.value);
-              }}
+              onChange={handleChangePassword}
               className="input-login-right"
             ></Input.Password>
 
@@ -171,7 +141,7 @@ const Home = () => {
       )}
 
       {loggedIn && (
-        <Link to="/notes" class="startbutton">
+        <Link to="/notes" className="startbutton">
           START WITH YOUR NOTES
         </Link>
       )}
