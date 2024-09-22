@@ -4,8 +4,6 @@ import Axios from "axios";
 import Cookies from "universal-cookie";
 import profile from "../assets/profile.png";
 
-const { TextArea } = Input;
-
 const MyProfile = ({ isNew }) => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const [username, setUsername] = useState();
@@ -61,7 +59,7 @@ const MyProfile = ({ isNew }) => {
     <div className="myprofile-container">
       {isDataFetched && (
         <div className="myprofile-container">
-          <div className={"edit-div"}>MY PROFILE</div>
+          <div className={"header-div"}>MY PROFILE</div>
           <div className="myprofile-buttons">
             <div
               className={
@@ -130,42 +128,30 @@ const MyProfile = ({ isNew }) => {
               >
                 Phone number: <Input disabled={viewState} value={phone}></Input>
               </div>
-              <div
-                className={
-                  viewState
-                    ? "myprofile-div"
-                    : "myprofile-div edit-my-profile-div"
-                }
-              >
-                Role: {data.role}
-              </div>
               {viewState && (
                 <button
                   onClick={() => {
                     setViewState(false);
                   }}
-                  class="save-button"
                 >
-                  <span class="save-button-content">Edit</span>
+                  <span>Edit</span>
                 </button>
               )}
               {!viewState && (
-                <div className="save-div">
+                <div>
                   <button
                     onClick={() => {
                       setViewState(true);
                     }}
-                    class="cancel-button"
                   >
-                    <span class="cancel-button-content">Cancel</span>
+                    <span>Cancel</span>
                   </button>
                   <button
                     onClick={() => {
                       setViewState(true);
                     }}
-                    class="save-button"
                   >
-                    <span class="save-button-content">Save</span>
+                    <span>Save</span>
                   </button>
                 </div>
               )}
