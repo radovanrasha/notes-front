@@ -185,12 +185,6 @@ body {
   margin-bottom: 8px;
 }
 
-.header-div {
-  color: var(--text-color);
-  display: flex;
-  justify-content: center;
-}
-
 h2 {
   margin-top: 10px;
 }
@@ -199,9 +193,6 @@ h2 {
   .profile-wrapper {
     width: 60%;
     margin: 15px 40px 15px 40px;
-  }
-  .header-div {
-    display: none;
   }
 }
 
@@ -236,9 +227,7 @@ h2 {
     width: 60%;
     margin: 15px 40px 15px 40px;
   }
-  .header-div {
-    display: none;
-  }
+
   body {
     font-size: 12px;
   }

@@ -56,7 +56,7 @@ const MyProfile = ({ isNew }) => {
   };
 
   return (
-    <div className="myprofile-container">
+    <div>
       {isDataFetched && (
         <div className="myprofile-container">
           <div className={"header-div"}>MY PROFILE</div>
@@ -101,48 +101,50 @@ const MyProfile = ({ isNew }) => {
 
           {activeTab === "myprofile" && (
             <div className="myprofile-div-container">
-              <div
-                className={
-                  viewState
-                    ? "myprofile-div"
-                    : "myprofile-div edit-my-profile-div"
-                }
-              >
-                Email: {data.email}
+              <div className="myprofile-row">
+                <labeL>Email: </labeL> <p>{data.email}</p>
               </div>
-              <div
-                className={
-                  viewState
-                    ? "myprofile-div"
-                    : "myprofile-div edit-my-profile-div"
-                }
-              >
-                Username: <Input disabled={viewState} value={username}></Input>
+              <div className="myprofile-row">
+                <labeL>Username: </labeL>
+                <Input
+                  className={
+                    viewState
+                      ? "myprofile-div"
+                      : "myprofile-div edit-my-profile-div"
+                  }
+                  disabled={viewState}
+                  value={username}
+                ></Input>
               </div>
 
-              <div
-                className={
-                  viewState
-                    ? "myprofile-div"
-                    : "myprofile-div edit-my-profile-div"
-                }
-              >
-                Phone number: <Input disabled={viewState} value={phone}></Input>
+              <div className="myprofile-row">
+                <label>Phone number:</label>{" "}
+                <Input
+                  className={
+                    viewState
+                      ? "myprofile-div"
+                      : "myprofile-div edit-my-profile-div"
+                  }
+                  disabled={viewState}
+                  value={phone}
+                ></Input>
               </div>
               {viewState && (
-                <button
-                  className="custom-button-blue"
-                  onClick={() => {
-                    setViewState(false);
-                  }}
-                >
-                  <span>Edit</span>
-                </button>
+                <div className="myprofile-row">
+                  <button
+                    className="logSwitch"
+                    onClick={() => {
+                      setViewState(false);
+                    }}
+                  >
+                    <span>Edit</span>
+                  </button>
+                </div>
               )}
               {!viewState && (
-                <div>
+                <div className="myprofile-row">
                   <button
-                    className="custom-button-blue"
+                    className="logSwitch"
                     onClick={() => {
                       setViewState(true);
                     }}
@@ -150,7 +152,7 @@ const MyProfile = ({ isNew }) => {
                     <span>Cancel</span>
                   </button>
                   <button
-                    className="custom-button-red"
+                    className="logSwitch"
                     onClick={() => {
                       setViewState(true);
                     }}

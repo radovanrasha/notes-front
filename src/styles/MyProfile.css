@@ -1,5 +1,7 @@
 .myprofile-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   color: var(--text-color);
   font-size: 24px;
@@ -9,16 +11,31 @@
 }
 
 .myprofile-div {
-  width: 30%;
+  width: 500px;
   color: var(--text-color);
-  margin: 10px 0px;
 }
 
-.myprofile-div input {
+.myprofile-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.myprofile-row label {
+  width: 200px;
+  margin-right: 10px;
+}
+
+.myprofile-row p {
+  width: 500px;
+}
+
+.myprofile-div {
   color: var(--text-color) !important;
 }
 
-.edit-my-profile-div input {
+.edit-my-profile-div {
   color: var(--bg-color) !important;
 }
 
@@ -28,7 +45,7 @@
   font-size: 24px;
   word-wrap: break-word;
   width: 100%;
-  justify-content: left;
+  justify-content: center;
 }
 
 .editIcon {
@@ -38,6 +55,7 @@
 
 .myprofile-buttons {
   display: flex;
+  justify-content: center;
   width: 100%;
   gap: 10px;
   margin: 10px 0px;
@@ -76,12 +94,6 @@
   align-items: center;
 }
 
-.myprofile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .myprofile-div-container {
   display: flex;
   flex-direction: column;
@@ -102,7 +114,7 @@
 
 .follow-cards {
   display: flex;
-  width: 100%;
+  width: 90%;
   flex-wrap: wrap;
   gap: 20px;
 }
