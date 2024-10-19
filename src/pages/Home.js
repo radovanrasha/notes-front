@@ -55,7 +55,7 @@ const Home = ({ loggedIn }) => {
       cookies.set("jwt", res.data.token, {
         expires: new Date(decoded.exp * 1000),
       });
-      cookies.set("user", res.data.item._doc._id, {
+      cookies.set("user", res.data.item._id, {
         expires: new Date(decoded.exp * 1000),
       });
 
